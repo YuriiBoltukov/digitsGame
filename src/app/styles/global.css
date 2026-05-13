@@ -1,13 +1,28 @@
+:root {
+  --color-primary: #ea580c;
+  --color-primary-hover: #c2410c;
+  --color-border-light: #e5e7eb;
+  --color-text-main: #111827;
+  --color-gray-50: #f9fafb;
+  --color-gray-200: #e5e7eb;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #root {
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
