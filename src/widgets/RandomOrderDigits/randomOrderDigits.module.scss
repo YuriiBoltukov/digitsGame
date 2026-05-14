@@ -1,0 +1,42 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+  touch-action: none;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &[data-dragging] {
+    opacity: 0.85;
+  }
+}
+
+.cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 200px;
+  height: 50px;
+  padding: 0;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border-light);
+  background-color: #fff;
+  color: var(--color-text-main);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
