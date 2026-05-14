@@ -31,6 +31,7 @@ const dragSensors = [
 
 export type RandomOrderDigitsProps = {
   digits: number[]
+  onOrderChange?: (values: number[]) => void
 }
 
 type Item = { id: string; value: number }
@@ -91,7 +92,7 @@ function SortableDigitRow({
   )
 }
 
-export function RandomOrderDigits({ digits }: RandomOrderDigitsProps) {
+export function RandomOrderDigits({ digits, onOrderChange }: RandomOrderDigitsProps) {
   const [items, setItems] = useState<Item[]>(() => toShuffledItems(digits))
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const selectedRef = useRef<string | null>(null)
@@ -109,6 +110,10 @@ export function RandomOrderDigits({ digits }: RandomOrderDigitsProps) {
     setItems(toShuffledItems(digits))
     clearSelection()
   }, [digits, digitsKey, clearSelection])
+
+  useEffect(() => {
+    onOrderChange?.(items.map((item) => item.value))
+  }, [items, onOrderChange])
 
   const handleDragStart = useCallback(() => {
     clearSelection()
