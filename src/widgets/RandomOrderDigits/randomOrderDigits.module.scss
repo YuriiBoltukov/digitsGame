@@ -14,11 +14,6 @@
   width: 100%;
   max-width: 200px;
   touch-action: none;
-  cursor: grab;
-
-  &:active {
-    cursor: grabbing;
-  }
 
   &[data-dragging] {
     opacity: 0.85;
@@ -33,10 +28,27 @@
   width: 200px;
   height: 50px;
   padding: 0;
+  margin: 0;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border-light);
   background-color: #fff;
   color: var(--color-text-main);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  font: inherit;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+.cellSelected {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
