@@ -1,13 +1,22 @@
+import { useCallback, useState } from 'react'
+import { CorrectOrderDigits } from '../../widgets/CorrectOrderDigits/CorrectOrderDigits'
 import { Footer } from '../../widgets/Footer/Footer'
+import { generateRandomDigitsArray } from '../../shared/lib/generateRandomDigitsArray'
 import styles from './gamePage.module.scss'
 
 export function GamePage() {
+  const [digits, setDigits] = useState(generateRandomDigitsArray)
+
+  const handleRestart = useCallback(() => {
+    setDigits(generateRandomDigitsArray())
+  }, [])
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>GamePage</h1>
+        <CorrectOrderDigits digits={digits} />
       </main>
-      <Footer />
+      <Footer onRestart={handleRestart} />
     </div>
   )
 }

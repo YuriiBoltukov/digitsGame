@@ -1,14 +1,22 @@
 import styles from './footer.module.scss'
 
-export function Footer() {
+export type FooterProps = {
+  onRestart: () => void
+}
+
+export function Footer({ onRestart }: FooterProps) {
   return (
-        <footer className={styles.footer}>
-            <button type="button" className={styles.primaryButton}>
-              проверить ответ
-            </button>
-            <button type="button" className={styles.secondaryButton}>
-              начать заново
-            </button>
-        </footer>
-    )
+    <footer className={styles.footer}>
+      <button type="button" className={styles.primaryButton}>
+        Проверить ответ
+      </button>
+      <button
+        type="button"
+        className={styles.secondaryButton}
+        onClick={onRestart}
+      >
+        Начать заново
+      </button>
+    </footer>
+  )
 }
