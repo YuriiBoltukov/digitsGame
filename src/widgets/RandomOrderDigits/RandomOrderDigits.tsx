@@ -2,6 +2,7 @@ import {
   type KeyboardEvent,
   useCallback,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -19,6 +20,9 @@ import { shuffleArray } from '../../shared/lib/shuffleArray'
 import styles from './randomOrderDigits.module.scss'
 
 const GROUP_ID = 'random-order-digits'
+
+const FULL_ORDER_HINT =
+  'Перетаскивайте карточки, чтобы изменить порядок, или кликните по одной, затем по другой — они поменяются местами.'
 
 const dragSensors = [
   PointerSensor.configure({
@@ -93,6 +97,8 @@ function SortableDigitRow({
 }
 
 export function RandomOrderDigits({ digits, onOrderChange }: RandomOrderDigitsProps) {
+  const titleId = useId()
+  const shortHintId = useId()
   const [items, setItems] = useState<Item[]>(() => toShuffledItems(digits))
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const selectedRef = useRef<string | null>(null)
@@ -158,17 +164,41 @@ export function RandomOrderDigits({ digits, onOrderChange }: RandomOrderDigitsPr
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <ul className={styles.list} role="list">
-        {items.map((item, index) => (
-          <SortableDigitRow
-            key={item.id}
-            item={item}
-            index={index}
-            isSelected={selectedId === item.id}
-            onRowClick={handleRowClick}
-          />
-        ))}
-      </ul>
+      <section className={styles.root} aria-labelledby={titleId}>
+        <div className={styles.titleRow}>
+          <h2 id={titleId} className={styles.title}>
+            Текущая последовательность
+          </h2>
+          <div className={styles.hintWrap}>
+            <button
+              type="button"
+              className={styles.hintTrigger}
+              aria-label={`Подробнее: ${FULL_ORDER_HINT}`}
+            >
+              <span className={styles.hintTriggerMark} aria-hidden>
+                ?
+              </span>
+            </button>
+            <div className={styles.tooltip} aria-hidden="true">
+              {FULL_ORDER_HINT}
+            </div>
+          </div>
+        </div>
+        <ul className={styles.list} role="list" aria-describedby={shortHintId}>
+          {items.map((item, index) => (
+            <SortableDigitRow
+              key={item.id}
+              item={item}
+              index={index}
+              isSelected={selectedId === item.id}
+              onRowClick={handleRowClick}
+            />
+          ))}
+        </ul>
+        <p id={shortHintId} className={styles.hint}>
+          Перетащите карточки или кликните по двум разным — они поменяются местами.
+        </p>
+      </section>
     </DragDropProvider>
   )
 }
