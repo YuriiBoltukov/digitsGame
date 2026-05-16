@@ -1,4 +1,6 @@
-﻿import type { GameFeedback } from '@/entities/game/model/gameFeedback.types'
+﻿import { createPortal } from 'react-dom'
+
+import type { GameFeedback } from '@/entities/game/model/gameFeedback.types'
 import { FeedbackMessage } from '@/shared/ui/feedbackMessage/FeedbackMessage'
 
 import styles from './gameFeedbackToast.module.scss'
@@ -24,15 +26,24 @@ export function GameFeedbackToast({
       ? `${styles.root} ${styles.rootSuccess}`
       : `${styles.root} ${styles.rootWrong}`
 
-  return (
-    <FeedbackMessage
-      variant={feedback}
-      onDismiss={onDismiss}
-      classNames={{
-        root: rootClassName,
-        close: styles.toastClose,
-        text: styles.text,
-      }}
-    />
+  return createPortal(
+    <>
+      <button
+        type="button"
+        className={styles.backdrop}
+        aria-label="Закрыть уведомление"
+        onClick={onDismiss}
+      />
+      <FeedbackMessage
+        variant={feedback}
+        onDismiss={onDismiss}
+        classNames={{
+          root: rootClassName,
+          close: styles.toastClose,
+          text: styles.text,
+        }}
+      />
+    </>,
+    document.body,
   )
 }

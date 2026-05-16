@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
 import {
@@ -29,5 +30,20 @@ describe('GameFeedbackToast', () => {
     render(<GameFeedbackToast feedback="wrong" onDismiss={vi.fn()} />)
 
     expect(screen.getByText(GAME_MESSAGE_LOSE)).toBeInTheDocument()
+  })
+
+  it('dismisses when clicking outside the toast', async () => {
+    const user = userEvent.setup()
+    const onDismiss = vi.fn()
+
+    render(
+      <GameFeedbackToast feedback="success" onDismiss={onDismiss} />,
+    )
+
+    await user.click(
+      screen.getByRole('button', { name: 'Закрыть уведомление' }),
+    )
+
+    expect(onDismiss).toHaveBeenCalledOnce()
   })
 })

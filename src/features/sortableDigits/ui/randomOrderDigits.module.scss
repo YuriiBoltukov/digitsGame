@@ -170,6 +170,19 @@
   @include digit.digit-cell-selected;
 }
 
+.hintWrapCompact {
+  .hintTrigger {
+    cursor: pointer;
+  }
+
+  &:hover .tooltip,
+  &:focus-within .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 @media (max-width: 900px) {
   .root,
   .titleBand,
