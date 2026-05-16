@@ -39,6 +39,7 @@ const checkTransitionsWithReenter = [
   {
     target: 'wrongFeedback',
     reenter: true,
+    actions: 'showWrongFeedback',
   },
 ] as const
 
@@ -104,6 +105,7 @@ export const gamePageMachine = setup({
           },
           on: {
             DISMISS_FEEDBACK: {
+              target: 'answering',
               actions: 'hideBubble',
             },
             CHECK: [...checkTransitionsWithReenter],

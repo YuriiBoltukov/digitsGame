@@ -1,6 +1,7 @@
 ﻿import { createPortal } from 'react-dom'
 
 import type { GameFeedback } from '@/entities/game/model/gameFeedback.types'
+import { FeedbackDismissBackdrop } from '@/shared/ui/feedbackDismissBackdrop/FeedbackDismissBackdrop'
 import { FeedbackMessage } from '@/shared/ui/feedbackMessage/FeedbackMessage'
 
 import styles from './gameFeedbackToast.module.scss'
@@ -28,11 +29,9 @@ export function GameFeedbackToast({
 
   return createPortal(
     <>
-      <button
-        type="button"
-        className={styles.backdrop}
-        aria-label="Закрыть уведомление"
-        onClick={onDismiss}
+      <FeedbackDismissBackdrop
+        ariaLabel="Закрыть уведомление"
+        onDismiss={onDismiss}
       />
       <FeedbackMessage
         variant={feedback}

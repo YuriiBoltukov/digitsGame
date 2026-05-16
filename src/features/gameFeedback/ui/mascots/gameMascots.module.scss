@@ -16,6 +16,10 @@
   padding-bottom: 0;
 }
 
+.mascotColumnActive {
+  z-index: 100;
+}
+
 @supports not (width: 1cqw) {
   .mascotColumn {
     --mascot-animal-h: clamp(4rem, 12vw, 14.625rem);
@@ -70,6 +74,7 @@
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
+  z-index: 101;
 }
 
 .mascotLeft .speech {

@@ -1,16 +1,5 @@
 @use '../../../../app/styles/mixins/feedbackSurfaces' as fb;
 
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 99;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: default;
-}
-
 .root {
   position: fixed;
   z-index: 100;

@@ -15,7 +15,7 @@ export function MascotColumn({
 
   return (
     <aside
-      className={`${styles.mascotColumn} ${config.sideClassName}`}
+      className={`${styles.mascotColumn} ${config.sideClassName} ${showBubble ? styles.mascotColumnActive : ''}`}
       aria-label={config.ariaLabel}
     >
       <div className={styles.animal}>

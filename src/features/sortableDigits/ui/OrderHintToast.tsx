@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom'
 
 import { FeedbackCloseButton } from '@/shared/ui/feedbackCloseButton/FeedbackCloseButton'
+import { FeedbackDismissBackdrop } from '@/shared/ui/feedbackDismissBackdrop/FeedbackDismissBackdrop'
 
 import styles from './orderHintToast.module.scss'
 
@@ -12,17 +13,11 @@ export type OrderHintToastProps = {
 export function OrderHintToast({ message, onDismiss }: OrderHintToastProps) {
   return createPortal(
     <>
-      <button
-        type="button"
-        className={styles.backdrop}
-        aria-label="Закрыть подсказку"
-        onClick={onDismiss}
+      <FeedbackDismissBackdrop
+        ariaLabel="Закрыть подсказку"
+        onDismiss={onDismiss}
       />
-      <div
-        className={styles.root}
-        role="status"
-        onClick={(event) => event.stopPropagation()}
-      >
+      <div className={styles.root} role="status">
         <FeedbackCloseButton onClick={onDismiss} className={styles.close} />
         <p className={styles.text}>{message}</p>
       </div>

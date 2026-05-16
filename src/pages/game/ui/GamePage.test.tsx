@@ -66,6 +66,24 @@ describe('GamePage', () => {
     ).not.toBeInTheDocument()
   })
 
+  it('dismisses desktop feedback when clicking outside', async () => {
+    const user = userEvent.setup()
+
+    render(<GamePage />)
+
+    await user.click(
+      screen.getByRole('button', { name: 'Проверить ответ' }),
+    )
+
+    expect(screen.getByText('Победа!')).toBeInTheDocument()
+
+    await user.click(
+      screen.getByRole('button', { name: 'Закрыть сообщение' }),
+    )
+
+    expect(screen.queryByText('Победа!')).not.toBeInTheDocument()
+  })
+
   it('shows success flow after correct answer', async () => {
     const user = userEvent.setup()
 

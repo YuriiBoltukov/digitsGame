@@ -15,6 +15,8 @@ import {
   RandomOrderDigitsProvider,
   RandomOrderDigitsTitle,
 } from '@/features/sortableDigits'
+import { FeedbackDismissBackdrop } from '@/shared/ui/feedbackDismissBackdrop/FeedbackDismissBackdrop'
+
 import { gamePageMachine } from '../model/gamePage.machine'
 
 import styles from './GamePage.module.scss'
@@ -122,6 +124,13 @@ export function GamePage() {
           />
         </div>
       </div>
+
+      {!isCompact && visibleFeedback && (
+        <FeedbackDismissBackdrop
+          ariaLabel="Закрыть сообщение"
+          onDismiss={handleDismissFeedback}
+        />
+      )}
 
       {isCompact && (
         <GameFeedbackToast

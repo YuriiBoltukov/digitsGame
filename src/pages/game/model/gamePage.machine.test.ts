@@ -64,13 +64,29 @@ describe('gamePageMachine', () => {
     expect(actor.getSnapshot().context.bubbleVisible).toBe(false)
   })
 
-  it('dismisses feedback manually', () => {
+  it('dismisses feedback manually and returns to answering', () => {
     const actor = createActor(gamePageMachine).start()
 
     actor.send({ type: 'CHECK', userOrder: [3, 2, 1] })
     actor.send({ type: 'DISMISS_FEEDBACK' })
 
+    expect(actor.getSnapshot().matches({ playing: 'answering' })).toBe(
+      true,
+    )
     expect(actor.getSnapshot().context.bubbleVisible).toBe(false)
+  })
+
+  it('shows wrong feedback again after dismiss and another check', () => {
+    const actor = createActor(gamePageMachine).start()
+
+    actor.send({ type: 'CHECK', userOrder: [3, 2, 1] })
+    actor.send({ type: 'DISMISS_FEEDBACK' })
+    actor.send({ type: 'CHECK', userOrder: [3, 2, 1] })
+
+    expect(actor.getSnapshot().matches({ playing: 'wrongFeedback' })).toBe(
+      true,
+    )
+    expect(actor.getSnapshot().context.bubbleVisible).toBe(true)
   })
 
   it('re-enters wrong feedback on repeated incorrect checks', () => {
