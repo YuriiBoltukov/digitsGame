@@ -1,8 +1,29 @@
-export function shuffleArray<T>(items: readonly T[]): T[] {
-  const copy = [...items]
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+/**
+ * Returns new shuffled array
+ * using Fisher–Yates algorithm.
+ */
+export function shuffleArray<T>(
+  items: readonly T[],
+): T[] {
+  const shuffledItems = [...items]
+
+  for (
+    let currentIndex = shuffledItems.length - 1;
+    currentIndex > 0;
+    currentIndex--
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (currentIndex + 1),
+    )
+
+    ;[
+      shuffledItems[currentIndex],
+      shuffledItems[randomIndex],
+    ] = [
+      shuffledItems[randomIndex],
+      shuffledItems[currentIndex],
+    ]
   }
-  return copy
+
+  return shuffledItems
 }

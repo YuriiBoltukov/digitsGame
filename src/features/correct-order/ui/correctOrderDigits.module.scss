@@ -1,0 +1,47 @@
+@use '../../../app/styles/mixins/digit-cell' as digit;
+
+.root {
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
+  width: 100%;
+  padding-top: max(clamp(0.45rem, 1.4vmin, 0.65rem), env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(0.45rem, 1.4vmin, 0.65rem);
+  padding-inline: max(clamp(0.55rem, 2.5vw, 1rem), env(safe-area-inset-left, 0px))
+    max(clamp(0.55rem, 2.5vw, 1rem), env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.45rem, 1.8vw, 0.65rem) clamp(0.55rem, 2.5vw, 1.25rem);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(0.8125rem, 2.4vw, 0.9375rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.5vw, 8px);
+}
+
+.cell {
+  @include digit.digit-cell-static;
+}
+
+@media (max-width: 900px) {
+  .title {
+    flex: 1 1 100%;
+  }
+}

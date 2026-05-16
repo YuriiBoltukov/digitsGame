@@ -1,0 +1,166 @@
+@use '../../../../app/styles/mixins/feedback-surfaces' as fb;
+
+.mascotColumn {
+  --mascot-animal-h: clamp(4rem, 90cqw, 14.625rem);
+  --mascot-animal-y: clamp(0.25rem, 2.2vmin, 1.3rem);
+  --mascot-bubble-gap: clamp(0.4rem, 1.5vw, 0.65rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(0.15rem, 0.8vmin, 0.25rem);
+}
+
+@supports not (width: 1cqw) {
+  .mascotColumn {
+    --mascot-animal-h: clamp(4rem, 12vw, 14.625rem);
+  }
+}
+
+.mascotLeft {
+  align-items: flex-start;
+}
+
+.mascotRight {
+  align-items: flex-end;
+}
+
+.animal {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--mascot-animal-h);
+  height: var(--mascot-animal-h);
+  max-width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  filter: drop-shadow(var(--shadow-drop));
+  transform: translateY(var(--mascot-animal-y));
+}
+
+.animalImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.speech {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  margin-bottom: var(--mascot-bubble-gap);
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.speechVisible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mascotLeft .speech {
+  justify-content: flex-start;
+}
+
+.mascotRight .speech {
+  left: auto;
+  right: 0;
+  width: max-content;
+  max-width: min(19rem, calc(100vw - 3rem));
+  justify-content: flex-end;
+}
+
+.bubble {
+  @include fb.feedback-bubble-layout;
+  @include fb.feedback-bubble-vars-success;
+  text-align: start;
+}
+
+.bubbleClose {
+  @include fb.feedback-close-position;
+  top: 0.3rem;
+  right: 0.3rem;
+}
+
+.mascotRight .bubble {
+  text-align: end;
+}
+
+.bubbleWrong {
+  @include fb.feedback-bubble-vars-error;
+}
+
+%bubbleTail {
+  content: '';
+  position: absolute;
+  border-style: solid;
+}
+
+.bubbleWrongTailDown {
+  &::after {
+    @extend %bubbleTail;
+    bottom: -8px;
+    right: clamp(0.65rem, 6vw, 2rem);
+    border-width: 9px 7px 0;
+    border-color: var(--bubble-bg) transparent transparent;
+  }
+
+  &::before {
+    @extend %bubbleTail;
+    bottom: -11px;
+    right: calc(clamp(0.65rem, 6vw, 2rem) - 1px);
+    border-width: 11px 8px 0;
+    border-color: var(--bubble-border) transparent transparent;
+    z-index: -1;
+  }
+}
+
+.bubbleSuccessTailDown {
+  &::after {
+    @extend %bubbleTail;
+    bottom: -8px;
+    left: clamp(0.65rem, 6vw, 2rem);
+    border-width: 9px 7px 0;
+    border-color: var(--bubble-bg) transparent transparent;
+  }
+
+  &::before {
+    @extend %bubbleTail;
+    bottom: -11px;
+    left: calc(clamp(0.65rem, 6vw, 2rem) - 1px);
+    border-width: 11px 8px 0;
+    border-color: var(--bubble-border) transparent transparent;
+    z-index: -1;
+  }
+}
+
+.bubbleTitle {
+  margin: 0;
+  font-size: clamp(0.85rem, 2.4vw, 0.95rem);
+  font-weight: 600;
+}
+
+.bubbleText {
+  margin: 0;
+  font-size: clamp(0.78rem, 2.2vw, 0.8125rem);
+  line-height: 1.4;
+
+  &:only-child {
+    font-size: clamp(0.82rem, 2.4vw, 0.875rem);
+    font-weight: 600;
+  }
+}
