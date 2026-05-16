@@ -1,7 +1,6 @@
 ﻿import { useCallback, useState } from 'react'
 
 import { FULL_ORDER_HINT } from '@/entities/game/config/game.constants'
-import { useCompactGameFeedback } from '@/features/gameFeedback'
 
 import { useOrderDigitsContext } from '../model/orderDigitsContext'
 import { OrderHintToast } from './OrderHintToast'
@@ -10,22 +9,19 @@ import styles from './randomOrderDigits.module.scss'
 
 export function RandomOrderDigitsTitle() {
   const { titleId, interactionLocked } = useOrderDigitsContext()
-  const isCompact = useCompactGameFeedback()
   const [isHintToastVisible, setIsHintToastVisible] = useState(false)
 
   const handleHintClick = useCallback(() => {
-    if (isCompact) {
-      setIsHintToastVisible(true)
+    if (interactionLocked) {
+      return
     }
-  }, [isCompact])
+
+    setIsHintToastVisible((current) => !current)
+  }, [interactionLocked])
 
   const handleDismissHint = useCallback(() => {
     setIsHintToastVisible(false)
   }, [])
-
-  const hintWrapClassName = isCompact
-    ? `${styles.hintWrap} ${styles.hintWrapCompact}`
-    : styles.hintWrap
 
   return (
     <>
@@ -35,12 +31,12 @@ export function RandomOrderDigitsTitle() {
             Текущая последовательность
           </h2>
 
-          <div className={hintWrapClassName}>
+          <div className={styles.hintWrap}>
             <button
               type="button"
               className={styles.hintTrigger}
               aria-label={`Подробнее: ${FULL_ORDER_HINT}`}
-              aria-expanded={isCompact ? isHintToastVisible : undefined}
+              aria-expanded={isHintToastVisible}
               disabled={interactionLocked}
               onClick={handleHintClick}
             >
@@ -48,15 +44,11 @@ export function RandomOrderDigitsTitle() {
                 ?
               </span>
             </button>
-
-            <div className={styles.tooltip} aria-hidden="true">
-              {FULL_ORDER_HINT}
-            </div>
           </div>
         </div>
       </div>
 
-      {isCompact && isHintToastVisible && (
+      {isHintToastVisible && (
         <OrderHintToast
           message={FULL_ORDER_HINT}
           onDismiss={handleDismissHint}

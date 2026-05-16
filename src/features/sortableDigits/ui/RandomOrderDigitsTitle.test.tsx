@@ -8,12 +8,6 @@ import { OrderDigitsContext } from '../model/orderDigitsContext'
 import type { OrderDigitsContextValue } from '../model/orderDigitsTypes'
 import { RandomOrderDigitsTitle } from './RandomOrderDigitsTitle'
 
-vi.mock('@/features/gameFeedback', () => ({
-  useCompactGameFeedback: vi.fn(() => false),
-}))
-
-import { useCompactGameFeedback } from '@/features/gameFeedback'
-
 const baseContext: OrderDigitsContextValue = {
   titleId: 'title-id',
   shortHintId: 'hint-id',
@@ -36,7 +30,6 @@ function renderTitle(context = baseContext) {
 
 describe('RandomOrderDigitsTitle', () => {
   it('renders title and hint trigger', () => {
-    vi.mocked(useCompactGameFeedback).mockReturnValue(false)
     renderTitle()
 
     expect(
@@ -50,7 +43,6 @@ describe('RandomOrderDigitsTitle', () => {
   })
 
   it('disables hint trigger when interaction is locked', () => {
-    vi.mocked(useCompactGameFeedback).mockReturnValue(false)
     renderTitle({ ...baseContext, interactionLocked: true })
 
     expect(
@@ -60,8 +52,7 @@ describe('RandomOrderDigitsTitle', () => {
     ).toBeDisabled()
   })
 
-  it('shows hint toast on compact layout when trigger is clicked', async () => {
-    vi.mocked(useCompactGameFeedback).mockReturnValue(true)
+  it('shows hint toast when trigger is clicked', async () => {
     const user = userEvent.setup()
 
     renderTitle()
@@ -75,17 +66,17 @@ describe('RandomOrderDigitsTitle', () => {
     expect(screen.getByRole('status')).toHaveTextContent(FULL_ORDER_HINT)
   })
 
-  it('does not show hint toast on desktop when trigger is clicked', async () => {
-    vi.mocked(useCompactGameFeedback).mockReturnValue(false)
+  it('hides hint toast when trigger is clicked again', async () => {
     const user = userEvent.setup()
 
     renderTitle()
 
-    await user.click(
-      screen.getByRole('button', {
-        name: `Подробнее: ${FULL_ORDER_HINT}`,
-      }),
-    )
+    const trigger = screen.getByRole('button', {
+      name: `Подробнее: ${FULL_ORDER_HINT}`,
+    })
+
+    await user.click(trigger)
+    await user.click(trigger)
 
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })

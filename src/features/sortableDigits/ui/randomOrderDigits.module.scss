@@ -43,17 +43,9 @@
 }
 
 .hintWrap {
-  position: relative;
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
-
-  &:hover .tooltip,
-  &:focus-within .tooltip {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
 }
 
 .hintTrigger {
@@ -68,7 +60,7 @@
   border-radius: 50%;
   background: var(--color-surface);
   color: var(--color-primary);
-  cursor: help;
+  cursor: pointer;
   line-height: 1;
 
   &:focus-visible {
@@ -85,34 +77,6 @@
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1;
-}
-
-.tooltip {
-  position: absolute;
-  z-index: 50;
-  top: calc(100% + 0.35rem);
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: min(18rem, calc(100vw - 2rem));
-  margin: 0;
-  padding: 0.5rem 0.65rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-md);
-  font-size: 0.8rem;
-  font-weight: 400;
-  line-height: 1.35;
-  color: var(--color-text);
-  text-align: left;
-  text-wrap: balance;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity var(--transition-hint),
-    visibility var(--transition-hint);
 }
 
 .footerHintSlot {
@@ -168,19 +132,6 @@
 
 .cellSelected {
   @include digit.digit-cell-selected;
-}
-
-.hintWrapCompact {
-  .hintTrigger {
-    cursor: pointer;
-  }
-
-  &:hover .tooltip,
-  &:focus-within .tooltip {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
 }
 
 @media (max-width: 900px) {

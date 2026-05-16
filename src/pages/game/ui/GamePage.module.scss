@@ -20,8 +20,7 @@
   gap: clamp(0.5rem, 2vw, 1rem);
   padding-inline: max(0.75rem, env(safe-area-inset-left, 0px))
     max(0.75rem, env(safe-area-inset-right, 0px));
-  overflow-x: clip;
-  overflow-y: visible;
+  overflow: visible;
 }
 
 .gameAreaCompact {
@@ -45,6 +44,7 @@
   grid-column: 2;
   align-self: stretch;
   padding-inline: 0;
+  overflow: visible;
 }
 
 .gameAreaCompact .main {
@@ -137,7 +137,7 @@
   position: relative;
   z-index: 3;
   flex-shrink: 0;
-  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+  width: 100%;
 }
 
 @media (max-height: 720px) {
