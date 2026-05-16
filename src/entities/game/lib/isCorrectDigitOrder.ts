@@ -1,10 +1,6 @@
 import type { DigitSortOrder } from '../model/digitSortOrder.types'
 import { sortDigits } from './sortDigits'
 
-/**
- * Checks whether user order matches the puzzle digits
- * in the required ascending or descending order.
- */
 export function isCorrectDigitOrder(
   userOrder: readonly number[],
   puzzleDigits: readonly number[],

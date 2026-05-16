@@ -1,4 +1,4 @@
-﻿import { FeedbackMessage } from '@/shared/ui/feedback-message/FeedbackMessage'
+﻿import { FeedbackMessage } from '@/shared/ui/feedbackMessage/FeedbackMessage'
 
 import { MASCOT_CONFIG } from './mascotConfig'
 import type { MascotProps, MascotSide } from './mascot.types'

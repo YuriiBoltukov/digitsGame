@@ -1,20 +1,20 @@
 ﻿import { useCallback, useMemo, useRef } from 'react'
 import { useMachine } from '@xstate/react'
 
-import { CorrectOrderDigits } from '@/features/correct-order'
+import { CorrectOrderDigits } from '@/features/correctOrder'
 import { Footer } from '@/features/footer'
 import {
   GameFeedbackToast,
   LeftMascot,
   RightMascot,
   useCompactGameFeedback,
-} from '@/features/game-feedback'
+} from '@/features/gameFeedback'
 import {
   RandomOrderDigitsHint,
   RandomOrderDigitsList,
   RandomOrderDigitsProvider,
   RandomOrderDigitsTitle,
-} from '@/features/sortable-digits'
+} from '@/features/sortableDigits'
 import { gamePageMachine } from '../model/gamePage.machine'
 
 import styles from './GamePage.module.scss'
@@ -68,43 +68,49 @@ export function GamePage() {
           onOrderChange={handleOrderChange}
           interactionLocked={isWon}
         >
-          <main className={styles.main}>
-            <div className={styles.mainTitle}>
-              <RandomOrderDigitsTitle />
-            </div>
+          <div
+            className={
+              isCompact ? styles.gameAreaCompact : styles.gameArea
+            }
+          >
+            {!isCompact && (
+              <div className={styles.mascotSlot}>
+                <LeftMascot
+                  feedback={visibleFeedback}
+                  onDismissFeedback={handleDismissFeedback}
+                />
+              </div>
+            )}
 
-            <div className={styles.playScroll}>
-              <div className={styles.playScrollInner}>
-                <div className={layoutClassName} aria-live="polite">
-                  {!isCompact && (
-                    <div className={styles.mascotSlot}>
-                      <LeftMascot
-                        feedback={visibleFeedback}
-                        onDismissFeedback={handleDismissFeedback}
-                      />
+            <main className={styles.main}>
+              <div className={styles.mainTitle}>
+                <RandomOrderDigitsTitle />
+              </div>
+
+              <div className={styles.playScroll}>
+                <div className={styles.playScrollInner}>
+                  <div className={layoutClassName} aria-live="polite">
+                    <div className={styles.gameColumn}>
+                      <RandomOrderDigitsList />
                     </div>
-                  )}
-
-                  <div className={styles.gameColumn}>
-                    <RandomOrderDigitsList />
                   </div>
-
-                  {!isCompact && (
-                    <div className={styles.mascotSlot}>
-                      <RightMascot
-                        feedback={visibleFeedback}
-                        onDismissFeedback={handleDismissFeedback}
-                      />
-                    </div>
-                  )}
                 </div>
               </div>
-            </div>
 
-            <div className={styles.mainHint}>
-              <RandomOrderDigitsHint />
-            </div>
-          </main>
+              <div className={styles.mainHint}>
+                <RandomOrderDigitsHint />
+              </div>
+            </main>
+
+            {!isCompact && (
+              <div className={styles.mascotSlot}>
+                <RightMascot
+                  feedback={visibleFeedback}
+                  onDismissFeedback={handleDismissFeedback}
+                />
+              </div>
+            )}
+          </div>
         </RandomOrderDigitsProvider>
 
         <div className={styles.footerSlot}>

@@ -7,9 +7,6 @@ export type FooterProps = {
   showNewGameButton: boolean
 }
 
-/**
- * Game footer with primary game actions.
- */
 export function Footer({
   onNewGame,
   onCheck,

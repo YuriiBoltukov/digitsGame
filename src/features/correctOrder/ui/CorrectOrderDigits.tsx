@@ -11,9 +11,6 @@ export type CorrectOrderDigitsProps = {
   targetOrder: DigitSortOrder
 }
 
-/**
- * Displays digits in the correct order for the current round.
- */
 export function CorrectOrderDigits({
   digits,
   targetOrder,

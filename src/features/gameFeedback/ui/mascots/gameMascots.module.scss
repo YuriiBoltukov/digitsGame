@@ -1,8 +1,8 @@
-@use '../../../../app/styles/mixins/feedback-surfaces' as fb;
+@use '../../../../app/styles/mixins/feedbackSurfaces' as fb;
 
 .mascotColumn {
   --mascot-animal-h: clamp(4rem, 90cqw, 14.625rem);
-  --mascot-animal-y: clamp(0.25rem, 2.2vmin, 1.3rem);
+  --mascot-animal-y: 0;
   --mascot-bubble-gap: clamp(0.4rem, 1.5vw, 0.65rem);
 
   display: flex;
@@ -13,7 +13,7 @@
   min-width: 0;
   position: relative;
   z-index: 2;
-  padding-bottom: clamp(0.15rem, 0.8vmin, 0.25rem);
+  padding-bottom: 0;
 }
 
 @supports not (width: 1cqw) {

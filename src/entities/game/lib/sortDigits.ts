@@ -1,8 +1,5 @@
 import type { DigitSortOrder } from '../model/digitSortOrder.types'
 
-/**
- * Returns puzzle digits sorted in the target order.
- */
 export function sortDigits(
   digits: readonly number[],
   sortOrder: DigitSortOrder,

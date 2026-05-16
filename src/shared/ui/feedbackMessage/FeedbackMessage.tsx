@@ -1,6 +1,6 @@
 ﻿import { getFeedbackMessage } from '@/entities/game/lib/getFeedbackMessage'
 import type { GameFeedbackVariant } from '@/entities/game/model/gameFeedback.types'
-import { FeedbackCloseButton } from '../feedback-close-button/FeedbackCloseButton'
+import { FeedbackCloseButton } from '../feedbackCloseButton/FeedbackCloseButton'
 
 export type FeedbackMessageClassNames = {
   root: string

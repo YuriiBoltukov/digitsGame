@@ -1,5 +1,5 @@
-import { FeedbackMessage } from '../../shared/ui/FeedbackMessage'
-import type { GameFeedback } from '../../shared/types/gameFeedback.types'
+﻿import type { GameFeedback } from '@/entities/game/model/gameFeedback.types'
+import { FeedbackMessage } from '@/shared/ui/feedbackMessage/FeedbackMessage'
 
 import styles from './gameFeedbackToast.module.scss'
 
@@ -8,6 +8,9 @@ export type GameFeedbackToastProps = {
   onDismiss: () => void
 }
 
+/**
+ * Displays temporary game feedback message on compact layouts.
+ */
 export function GameFeedbackToast({
   feedback,
   onDismiss,
