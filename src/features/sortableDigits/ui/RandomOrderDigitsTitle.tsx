@@ -27,23 +27,25 @@ export function RandomOrderDigitsTitle() {
     <>
       <div className={styles.titleBand}>
         <div className={styles.titleRow}>
-          <h2 id={titleId} className={styles.title}>
-            Текущая последовательность
-          </h2>
+          <div className={styles.titleGroup}>
+            <h2 id={titleId} className={styles.title}>
+              Текущая последовательность
+            </h2>
 
-          <div className={styles.hintWrap}>
-            <button
-              type="button"
-              className={styles.hintTrigger}
-              aria-label={`Подробнее: ${FULL_ORDER_HINT}`}
-              aria-expanded={isHintToastVisible}
-              disabled={interactionLocked}
-              onClick={handleHintClick}
-            >
-              <span className={styles.hintTriggerMark} aria-hidden>
-                ?
-              </span>
-            </button>
+            <div className={styles.hintWrap}>
+              <button
+                type="button"
+                className={styles.hintTrigger}
+                aria-label={`Подробнее: ${FULL_ORDER_HINT}`}
+                aria-expanded={isHintToastVisible}
+                disabled={interactionLocked}
+                onClick={handleHintClick}
+              >
+                <span className={styles.hintTriggerMark} aria-hidden>
+                  ?
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
